@@ -2,6 +2,7 @@
 from google_play_scraper import Sort, reviews_all
 from datetime import datetime
 import requests
+import json
 
 
 # 'lang'은 리뷰를 가져올 언어를 설정합니다. 여기서는 'ko'로 설정하여 한국어 리뷰를 가져옵니다.
@@ -33,6 +34,7 @@ reviews_data = []
 for item in result:
     print(item['content'])
 
+
 print("### 슬랙 발송 시작")
 
 
@@ -42,9 +44,10 @@ def notice_message(token, channel, text, attachments):
     response = requests.post("https://slack.com/api/chat.postMessage",
         headers={"Authorization": "Bearer "+token},
         data={"channel": channel, "text": text ,"attachments": attachments})
+    print(response.status_code)
 
 # 생성한 웹훅 주소
-Token = 'xoxb-6379869257104-7102812393874-ABOuWNnEidAzm9umizyytU9M'
+Token = 'xoxb-6379869257104-7097754569174-g1GLuUjBpc5gYLOckxgG7tPB'
 str1_title = '오늘의 증시 KOSPI 2021-09-17 (금)'
 str2 = 'test 메시지를 보냅니다.'
 
