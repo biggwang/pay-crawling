@@ -58,7 +58,6 @@ attach_dict = {
 } # attachment 에 넣고싶은 목록들을 딕셔너리 형태로 입력
 
 
-
 attach_list=[attach_dict] # 딕셔너리 형태를 리스트로 변환
 notice_message(Token, "#crawling", str2, attach_list)
 
