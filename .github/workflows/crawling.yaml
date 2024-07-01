@@ -23,9 +23,9 @@ jobs:
         python -m pip install --upgrade pip
         python -m pip install requests
         pip install google_play_scraper
-        pip install app-store-scraper
+        pip3 install app-store-scraper
 
     - name: Run crawler script
       run: python crawler.py 
       env:
-        SLACK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        SLACK_URL: ${{ secrets.SLACK_WEBHOOK_URL }
