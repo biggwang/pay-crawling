@@ -28,4 +28,4 @@ jobs:
     - name: Run crawler script
       run: python crawler.py 
       env:
-        SLACK_URL: ${{ secrets.SLACK_WEBHOOK_URL }
+        SLACK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
