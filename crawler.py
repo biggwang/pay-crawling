@@ -1,7 +1,7 @@
 # google_play_scraper에서 필요한 기능과 정렬 방식을 가져옵니다.
 from datetime import datetime
 import webclient
-import google_scraper
+import scraper
 
 
 # 수집하고자 하는 특정 기간 설정
@@ -13,7 +13,7 @@ reviews_data = []
 
 
 # 수집된 리뷰에 대해 반복하며 필요한 정보를 리스트에 저장
-result = google_scraper.get_reviews()
+result = scraper.get_reviews()
 # app_store_scraper.get_review()
 
 
