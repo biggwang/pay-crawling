@@ -21,9 +21,19 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install requests
+        pip install six
+        pip install requests
         pip install google_play_scraper
-        pip3 install app-store-scraper
+        pip install app-store-scraper
+        pip install --upgrade --user urllib3
+        pip install --upgrade --user six
+
+    - name: Verify installed packages
+      run: |
+        pip show six
+        pip show requests
+        pip show google_play_scraper
+        pip show app-store-scraper
 
     - name: Run crawler script
       run: python crawler.py 
