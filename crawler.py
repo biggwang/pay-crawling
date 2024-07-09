@@ -2,6 +2,8 @@
 from datetime import datetime
 import webclient
 import scraper
+import ios_scraper
+
 
 
 # 수집하고자 하는 특정 기간 설정
@@ -12,12 +14,19 @@ end_date = datetime(2024,5,8)
 reviews_data = []
 
 
+print('############################# aos 시작 #############################')
 # 수집된 리뷰에 대해 반복하며 필요한 정보를 리스트에 저장
-result = scraper.get_reviews()
-# app_store_scraper.get_review()
+# result = scraper.get_reviews()
+
+# for item in result:
+#    print(item['content'])
+print('############################# aos 종료 #############################')
 
 
-for item in result:
-    print(item['content'])
+
+print('############################# ios 시작 #############################')
+ios_scraper.get_ios_reviews()
+print('############################# ios 종료 #############################')
+
 
 webclient.send_message("#crawling", '오늘의 목소리')

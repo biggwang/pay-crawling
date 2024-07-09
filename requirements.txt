@@ -2,3 +2,8 @@ requests
 google_play_scraper
 app-store-scraper
 six
+
+# requests==2.31.0
+# urllib3==1.26.15
+# chardet==4.0.0
+# app_store_scraper==0.3.5
