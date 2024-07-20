@@ -15,14 +15,15 @@ reviews_data = []
 
 
 print('############################# aos 시작 #############################')
-result = scraper.get_reviews()
+# result = scraper.get_reviews()
 print('############################# aos 종료 #############################')
 
 
 
 print('############################# ios 시작 #############################')
-ios_scraper.get_ios_reviews()
+ios_result = ios_scraper.get_ios_reviews(['송금', '쓰레기'])
+print(ios_result)
 print('############################# ios 종료 #############################')
 
 
-webclient.send_message("#crawling", '오늘의 목소리')
+webclient.send_message("#crawling", ios_result)
