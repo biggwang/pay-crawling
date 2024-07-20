@@ -1,6 +1,6 @@
 from google_play_scraper import Sort, reviews_all
 
-def get_reviews():
+def get_reviews(keywords):
     # 'lang'은 리뷰를 가져올 언어를 설정합니다. 여기서는 'ko'로 설정하여 한국어 리뷰를 가져옵니다.
     lang = 'ko'
     # 'cont'는 리뷰를 가져올 국가를 설정합니다. 여기서는 'kr'로 설정하여 한국에서의 리뷰를 가져옵니다.
@@ -16,7 +16,12 @@ def get_reviews():
             filter_score_with=5 #평점이 5점인 리뷰만 크롤링        
     )
 
-    for item in review_all:
-        print(item['content'])
+    filtered_reviews = []
 
-    return reviews_all
+    for item in review_all:
+        review_text = item['content'].lower()
+        if any(keyword.lower() in review_text for keyword in keywords):
+            #print(item['content'])
+            filtered_reviews.append(item['content'])
+
+    return filtered_reviews

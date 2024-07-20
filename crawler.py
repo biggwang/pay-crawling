@@ -15,7 +15,8 @@ reviews_data = []
 
 
 print('############################# aos 시작 #############################')
-# result = scraper.get_reviews()
+aos_result = scraper.get_reviews(['송금', '쓰레기'])
+print(aos_result)
 print('############################# aos 종료 #############################')
 
 
@@ -26,4 +27,8 @@ print(ios_result)
 print('############################# ios 종료 #############################')
 
 
-webclient.send_message("#crawling", ios_result)
+result = aos_result + ios_result
+print(result)
+
+
+webclient.send_message("#crawling", result)
