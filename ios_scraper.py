@@ -10,7 +10,11 @@ def convert_datetime_to_str(review):
 
 def get_ios_reviews():
     kakao_pay = AppStore(country="kr", app_name="kakaopay", app_id="847268987")
-    kakao_pay.review(how_many=50)  # Adjust the number as needed
-    reviews = [convert_datetime_to_str(review) for review in kakao_pay.reviews]
-    print(reviews)
-    #response = json.dumps(reviews, indent=4, ensure_ascii=False)
+    kakao_pay.review(how_many=5)
+    
+    for item in kakao_pay.reviews:
+        pprint(item['review'])
+    
+
+    # pprint(kakao_pay.reviews)
+    # pprint(kakao_pay.reviews_count)
