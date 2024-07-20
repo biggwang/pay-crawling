@@ -15,11 +15,7 @@ reviews_data = []
 
 
 print('############################# aos 시작 #############################')
-# 수집된 리뷰에 대해 반복하며 필요한 정보를 리스트에 저장
-# result = scraper.get_reviews()
-
-# for item in result:
-#    print(item['content'])
+result = scraper.get_reviews()
 print('############################# aos 종료 #############################')
 
 
