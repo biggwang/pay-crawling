@@ -1,19 +1,13 @@
-from google_play_scraper import Sort, reviews_all
+from google_play_scraper import Sort, reviews_all, reviews
 
-def get_reviews(keywords):
-    # 'lang'은 리뷰를 가져올 언어를 설정합니다. 여기서는 'ko'로 설정하여 한국어 리뷰를 가져옵니다.
-    lang = 'ko'
-    # 'cont'는 리뷰를 가져올 국가를 설정합니다. 여기서는 'kr'로 설정하여 한국에서의 리뷰를 가져옵니다.
-    cont = 'kr'
-
-    # reviews_all 함수를 사용해 앱의 리뷰를 모두 가져옵니다. 이 예에서는 'com.hanbit.rundayfree'라는 앱의 리뷰를 가져옵니다.
+def get_reviews_filtered(keywords):
     review_all = reviews_all(
             'com.kakaopay.app',
-            sleep_milliseconds=3000, # 리뷰를 가져오는 사이의 대기 시간을 설정합니다. 0으로 설정하여 대기하지 않습니다.
-            lang=lang, # 리뷰의 언어를 설정합니다. 여기서는 위에서 설정한 'ko'(한국어)입니다.
-            country=cont, # 리뷰를 가져올 국가를 설정합니다. 여기서는 위에서 설정한 'kr'(한국)입니다.
-            sort=Sort.MOST_RELEVANT, # 리뷰를 어떤 기준으로 정렬할지 설정합니다. 가장 관련성 높은 순으로 정렬합니다.
-            filter_score_with=5 #평점이 5점인 리뷰만 크롤링        
+            sleep_milliseconds=3000,
+            lang='ko',
+            country='kr',
+            sort=Sort.NEWEST,
+            #filter_score_with=5 #평점이 5점인 리뷰만 크롤링        
     )
 
     filtered_reviews = []
@@ -21,7 +15,38 @@ def get_reviews(keywords):
     for item in review_all:
         review_text = item['content'].lower()
         if any(keyword.lower() in review_text for keyword in keywords):
-            #print(item['content'])
             filtered_reviews.append(item['content'])
 
     return filtered_reviews
+
+
+def get_reviews(keywords):
+    # review_all = reviews_all(
+    #         'com.kakaopay.app',
+    #         sleep_milliseconds=3000,
+    #         lang='ko',
+    #         country='kr',
+    #         num=1000,
+    #         sort=Sort.NEWEST,
+    # )
+
+    result, continuation_token  = reviews(
+            'com.kakaopay.app',
+            lang='ko',
+            country='kr',
+            count=10,
+            sort=Sort.NEWEST,
+    )
+
+    num_reviews = len(result)
+    print(f"######### Number of reviews fetched: {num_reviews} {continuation_token}")
+
+    # Filter the desired fields from each review
+    filtered_reviews = [
+        {'content': review['content'], 'at': review['at'], 'score': review['score']}
+        for review in result
+    ]
+
+    # Print the filtered reviews
+    return filtered_reviews
+
