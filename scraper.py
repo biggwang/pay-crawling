@@ -20,16 +20,7 @@ def get_reviews_filtered(keywords):
     return filtered_reviews
 
 
-def get_reviews(keywords):
-    # review_all = reviews_all(
-    #         'com.kakaopay.app',
-    #         sleep_milliseconds=3000,
-    #         lang='ko',
-    #         country='kr',
-    #         num=1000,
-    #         sort=Sort.NEWEST,
-    # )
-
+def get_reviews(keywords, start_date, end_date):
     result, continuation_token  = reviews(
             'com.kakaopay.app',
             lang='ko',
@@ -41,12 +32,16 @@ def get_reviews(keywords):
     num_reviews = len(result)
     print(f"######### Number of reviews fetched: {num_reviews} {continuation_token}")
 
-    # Filter the desired fields from each review
     filtered_reviews = [
-        {'content': review['content'], 'at': review['at'], 'score': review['score']}
+        {
+            'content': review['content'],
+            'at': review['at'].strftime('%y-%m-%d %H:%M:%S'),
+            'score': review['score']
+        }
         for review in result
+        if any(keyword.lower() in review['content'].lower() for keyword in keywords)
+        and start_date <= review['at'] < end_date
     ]
 
-    # Print the filtered reviews
     return filtered_reviews
 

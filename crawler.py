@@ -5,24 +5,20 @@ import scraper
 import ios_scraper
 
 
-
 # 수집하고자 하는 특정 기간 설정
-start_date = datetime(2024,5,7)
-end_date = datetime(2024,5,8)
-
-# 수집된 리뷰 데이터를 저장할 리스트 초기화 
-reviews_data = []
+start_date = datetime(2024, 6, 23, 0, 0, 0)
+end_date = datetime(2024, 7, 23, 23, 59, 59)
 
 
 print('############################# aos 시작 #############################')
-aos_result = scraper.get_reviews(['송금', '쓰레기'])
+aos_result = scraper.get_reviews(['송금', '쓰레기'], start_date, end_date)
 print(aos_result)
 print('############################# aos 종료 #############################')
 
 
 
 print('############################# ios 시작 #############################')
-ios_result = ios_scraper.get_reviews(['송금', '쓰레기'])
+ios_result = ios_scraper.get_reviews(['송금', '쓰레기'], start_date, end_date)
 print(ios_result)
 print('############################# ios 종료 #############################')
 
