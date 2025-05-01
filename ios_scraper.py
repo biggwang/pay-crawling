@@ -3,7 +3,7 @@ from datetime import datetime
 from pprint import pprint
 
 def get_reviews(keywords, start_date, end_date):
-    kakao_pay = AppStore(country="kr", app_name="kakaopay", app_id="1464496236")
+    kakao_pay = AppStore(country="kr", app_name="kakaopay", app_id="com.kakaopay.payapp.store")
     kakao_pay.review(how_many=10)
     
     filtered_reviews = []
