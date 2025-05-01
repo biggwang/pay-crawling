@@ -1,0 +1,68 @@
+# .github/workflows/daily_app_reviews.yaml
+
+# 워크플로우 이름
+name: Fetch Daily App Reviews
+
+# 워크플로우 실행 트리거 설정
+on: push
+  # 스케줄 설정: 매일 특정 시간에 자동으로 실행되도록 합니다.
+#  schedule:
+    # Cron 표현식으로 매일 UTC 00:00에 실행합니다.
+    # 한국 시간 (KST)은 UTC+9 이므로, UTC 00:00은 한국 시간으로 오전 9시입니다.
+    # 크론 표현식 도움말: https://crontab.guru/
+#    - cron: '0 0 * * *' # 매일 0시 0분 (UTC)
+
+  # 선택 사항: GitHub Actions 웹 UI에서 워크플로우를 수동으로 실행할 수 있도록 추가
+#  workflow_dispatch:
+#    inputs:
+#      app_id:
+#        description: 'App Bundle ID or App ID (e.g., com.kakaopay.wallet or 1464496236)'
+#        required: true
+#        default: 'com.kakaopay.wallet' # 기본 App ID 설정
+#      country:
+#        description: 'App Store Country Code (e.g., kr, us)'
+#        required: true
+#        default: 'kr' # 기본 국가 코드 설정
+
+# 실행할 작업(Job) 정의
+jobs:
+  fetch_reviews:
+    # 작업을 실행할 환경 지정
+    runs-on: ubuntu-latest # 표준 가상 환경 (Ubuntu 최신 버전)
+
+    # 작업에서 순차적으로 실행할 단계(Steps) 정의
+    steps:
+      - name: Checkout code
+        # 저장소 코드를 워크플로우 실행 환경으로 가져옵니다.
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        # Node.js 환경을 설정합니다. 라이브러리와 호환되는 버전을 지정하세요.
+        # 이전에 로컬에서 사용했던 Node.js 버전과 일치시키는 것이 좋습니다.
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # Node.js 버전 지정 (예: 20.x, 22.x 등)
+
+      - name: Install dependencies
+        # Node.js 스크립트 실행에 필요한 라이브러리들을 설치합니다.
+        # 프로젝트 루트에 app-store-scraper가 포함된 package.json 파일이 있어야 합니다.
+        run: npm install
+
+      - name: Run review script
+        # 수정된 Node.js 스크립트 파일을 실행합니다.
+        # APP_ID와 COUNTRY 환경 변수를 스크립트로 전달합니다.
+        run: node test_reviews.js # 스크립트 파일 이름 지정
+#        env:
+          # 스케줄 실행 시 사용될 기본 환경 변수 값
+          # 수동 실행 시에는 workflow_dispatch inputs 값이 기본값보다 우선합니다.
+          # 민감한 정보라면 GitHub Secrets에 저장하고 ${{ secrets.YOUR_SECRET_NAME }} 형식으로 사용합니다.
+#          APP_ID: ${{ github.event.inputs.app_id || 'com.kakaopay.wallet' }} # 수동 실행 시 입력 값, 없으면 기본값 사용
+#          COUNTRY: ${{ github.event.inputs.country || 'kr' }} # 수동 실행 시 입력 값, 없으면 기본값 사용
+
+      # 스크립트 실행 결과를 아티팩트로 저장하고 싶다면 아래 주석 해제 및 설정
+      # (스크립트에서 결과를 파일로 저장하도록 수정 필요)
+      # - name: Upload reviews artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: daily-app-reviews
+      #     path: reviews_output.txt # 스크립트에서 저장한 결과 파일 경로
