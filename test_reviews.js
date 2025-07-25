@@ -18,8 +18,8 @@ store.reviews(options)
         if (reviews.length > 0) {
             console.log("\n--- 첫 번째 리뷰 예시 ---");
             const firstReview = reviews[0];
-            console.log(`  날짜: ${firstReview.date}`);
-            console.log(`  작성자: ${firstReview.user}`);
+            console.log(`  날짜: ${firstReview.updated}`);
+            console.log(`  작성자: ${firstReview.userName}`);
             console.log(`  평점: ${firstReview.score} / 5`);
             console.log(`  제목: ${firstReview.title}`);
             console.log(`  내용: ${firstReview.text}`);
