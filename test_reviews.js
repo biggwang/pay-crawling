@@ -2,7 +2,7 @@ const store = require('app-store-scraper');
 
 //  리뷰를 가져올 앱의 옵션 설정
 const options = {
-    appId: '1464496236',
+    appId: '1087590209',
     country: 'kr', // 한국 리뷰를 원하시면 이 줄의 주석을 해제하세요.
     sort: store.sort.RECENT, //: 최신 리뷰 순
     page: 10, // 일단 첫 페이지 리뷰만 가져와 봅니다. (보통 한 페이지에 최대 50~150개 리뷰)
