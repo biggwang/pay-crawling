@@ -4,7 +4,7 @@ const store = require('app-store-scraper');
 const options = {
     appId: 'com.kakaopay.payapp.store',
     country: 'kr', // 한국 리뷰를 원하시면 이 줄의 주석을 해제하세요.
-    sort: store.sort.RECENT, //: 최신 리뷰 순
+    // sort: store.sort.RECENT, //: 최신 리뷰 순
     page: 10, // 일단 첫 페이지 리뷰만 가져와 봅니다. (보통 한 페이지에 최대 50~150개 리뷰)
 };
 
