@@ -2,7 +2,8 @@ const store = require('app-store-scraper');
 
 //  리뷰를 가져올 앱의 옵션 설정
 const options = {
-    appId: '1087590209',
+    id: 1464496236,
+    // appId: 'com.kakaopay.payapp.store',
     country: 'kr', // 한국 리뷰를 원하시면 이 줄의 주석을 해제하세요.
     sort: store.sort.RECENT, //: 최신 리뷰 순
     page: 10, // 일단 첫 페이지 리뷰만 가져와 봅니다. (보통 한 페이지에 최대 50~150개 리뷰)
@@ -19,7 +20,7 @@ store.reviews(options)
             console.log("\n--- 첫 번째 리뷰 예시 ---");
             const firstReview = reviews[0];
             console.log(`  날짜: ${firstReview.updated}`);
-            console.log(`  작성자: ${firstReview.userName}`);
+            console.log(`  작성자: ${firstReview.username}`);
             console.log(`  평점: ${firstReview.score} / 5`);
             console.log(`  제목: ${firstReview.title}`);
             console.log(`  내용: ${firstReview.text}`);
